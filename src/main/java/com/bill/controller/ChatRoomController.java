@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bill.dto.request.ChatContentCreateReqDto;
 import com.bill.dto.request.ChatContentDeleteReqDto;
+import com.bill.dto.request.ChatContentQueryReqDto;
 import com.bill.dto.request.ChatContentUpdateReqDto;
-import com.bill.dto.request.RequestBlankReqDto;
 import com.bill.dto.response.ChatContentAllQueryResDto;
 import com.bill.dto.response.ResponseBlankReqDto;
 import com.bill.service.ChatRoomService;
@@ -26,9 +26,9 @@ public class ChatRoomController {
 	private ChatRoomService service;
 	
 	@Operation(summary = "聊天室內容查詢", description = "聊天室內容查詢")
-	@PostMapping("/chat-content/all/query")
-	public ChatContentAllQueryResDto queryAllChatContent(RequestBlankReqDto reqDto) {
-		return service.queryAllContent();
+	@PostMapping("/chat-content/query")
+	public ChatContentAllQueryResDto queryChatContent(@Valid @RequestBody ChatContentQueryReqDto reqDto) {
+		return service.queryContent(reqDto);
 	}
 	
 	@Operation(summary = "聊天室內容新增", description = "聊天室內容新增")

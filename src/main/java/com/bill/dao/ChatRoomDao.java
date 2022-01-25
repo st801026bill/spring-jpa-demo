@@ -17,6 +17,10 @@ public class ChatRoomDao {
 		return repository.findAll(); 
 	}
 	
+	public List<ChatContent> findBySeqNo(int seqNo) {
+		return repository.findBySeqNo(seqNo); 
+	}
+	
 	public ChatContent save(ChatContent content) {
 		return repository.save(content);
 	}

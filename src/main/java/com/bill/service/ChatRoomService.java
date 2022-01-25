@@ -3,6 +3,7 @@ package com.bill.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.bill.dao.ChatRoomDao;
 import com.bill.dto.request.ChatContentCreateReqDto;
 import com.bill.dto.request.ChatContentDeleteReqDto;
+import com.bill.dto.request.ChatContentQueryReqDto;
 import com.bill.dto.request.ChatContentUpdateReqDto;
 import com.bill.dto.response.ChatContentAllQueryResDto;
 import com.bill.entity.ChatContent;
@@ -20,9 +22,10 @@ public class ChatRoomService {
 	@Autowired
 	private ChatRoomDao chatRoomDao;
 	
-	public ChatContentAllQueryResDto queryAllContent() {
-
-		List<ChatContent> contentList = chatRoomDao.fintAll();
+	public ChatContentAllQueryResDto queryContent(ChatContentQueryReqDto reqDto) {
+		String seqNo = reqDto.getSeqNo();
+		List<ChatContent> contentList = StringUtils.isBlank(seqNo)?
+				chatRoomDao.fintAll():chatRoomDao.findBySeqNo(Integer.valueOf(seqNo));
 		
 		List<ChatContentAllQueryResDto.ChatContent> chatContentList = contentList.stream().map(content -> {
 			ChatContentAllQueryResDto.ChatContent chatContent = new ChatContentAllQueryResDto.ChatContent();
