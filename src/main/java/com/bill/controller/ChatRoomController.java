@@ -19,7 +19,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@Tag(name = "ChatController", description = "聊天室管理服務")
+@Tag(name = "ChatRoomController", description = "聊天室管理服務")
 public class ChatRoomController {
 	
 	@Autowired
