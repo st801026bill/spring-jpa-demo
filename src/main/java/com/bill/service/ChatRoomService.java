@@ -24,8 +24,10 @@ public class ChatRoomService {
 	
 	public ChatContentAllQueryResDto queryContent(ChatContentQueryReqDto reqDto) {
 		String seqNo = reqDto.getSeqNo();
+		int page = reqDto.getPage();
+		int size = reqDto.getSize();
 		List<ChatContent> contentList = StringUtils.isBlank(seqNo)?
-				chatRoomDao.fintAll():chatRoomDao.findBySeqNo(Integer.valueOf(seqNo));
+				chatRoomDao.fintAll(page, size) : chatRoomDao.findBySeqNo(Integer.valueOf(seqNo));
 		
 		List<ChatContentAllQueryResDto.ChatContent> chatContentList = contentList.stream().map(content -> {
 			ChatContentAllQueryResDto.ChatContent chatContent = new ChatContentAllQueryResDto.ChatContent();
